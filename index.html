@@ -248,10 +248,12 @@
                     <div class="mb-3">
                         <label class="form-label">Ваше имя *</label>
                         <input type="text" class="form-control" id="reviewName" required>
+                        <div class="invalid-feedback">Пожалуйста, введите имя</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Ваш Email (для подтверждения)</label>
-                        <input type="email" class="form-control" id="reviewEmail" placeholder="example@mail.ru">
+                        <label class="form-label">Ваш Email *</label>
+                        <input type="email" class="form-control" id="reviewEmail" placeholder="example@mail.ru" required>
+                        <div class="invalid-feedback">Введите корректный email</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Оценка *</label>
@@ -263,16 +265,19 @@
                             <i class="bi bi-star" data-rating="5"></i>
                         </div>
                         <input type="hidden" id="reviewRating" value="0">
+                        <div class="invalid-feedback" id="ratingFeedback">Поставьте оценку</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Текст отзыва *</label>
-                        <textarea class="form-control" id="reviewText" rows="3" required></textarea>
+                        <textarea class="form-control" id="reviewText" rows="3" required maxlength="150"></textarea>
+                        <div class="invalid-feedback">Отзыв должен быть от 15 до 150 символов</div>
+                        <small class="text-muted">Максимум 150 символов</small>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" onclick="submitReview()">Отправить</button>
+                <button type="button" class="btn btn-primary" id="submitReviewBtn">Отправить</button>
             </div>
         </div>
     </div>
@@ -289,43 +294,54 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-10 col-xl-8">
-                <form id="trialForm" class="bg-white p-4 rounded-4 shadow-lg fade-in">
+                <form id="trialForm" class="bg-white p-4 rounded-4 shadow-lg fade-in" novalidate>
                     <div class="row g-2">
                         <div class="col-12 col-md-6">
                             <label class="form-label text-dark small fw-medium">Имя *</label>
                             <input type="text" class="form-control form-control-lg" id="name" required placeholder="Введите имя">
+                            <div class="invalid-feedback">Введите имя</div>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label text-dark small fw-medium">Телефон *</label>
-                            <input type="tel" class="form-control form-control-lg" id="phone" required placeholder="+7 (___) ___-__-__">
+                            <input type="tel" class="form-control form-control-lg" id="phone" required placeholder="+7 999 999 99 99">
+                            <div class="invalid-feedback">Введите корректный российский номер (11 цифр)</div>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label text-dark small fw-medium">Email *</label>
                             <input type="email" class="form-control form-control-lg" id="email" required placeholder="example@mail.ru">
+                            <div class="invalid-feedback">Введите корректный email</div>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label text-dark small fw-medium">Кто будет учиться?</label>
-                            <select class="form-select form-select-lg" id="who"><option>Я сам</option><option>Ребенок</option></select>
+                            <select class="form-select form-select-lg" id="who">
+                                <option>Я сам</option>
+                                <option>Ребенок</option>
+                            </select>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label text-dark small fw-medium">Формат</label>
                             <select class="form-select form-select-lg" id="format">
-                                <option>Индивидуально очно</option><option>В группе очно</option>
-                                <option>Индивидуально онлайн</option><option>В группе онлайн</option>
+                                <option>Индивидуально очно</option>
+                                <option>В группе очно</option>
+                                <option>Индивидуально онлайн</option>
+                                <option>В группе онлайн</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label text-dark small fw-medium">Абонемент</label>
                             <select class="form-select form-select-lg" id="subscription">
-                                <option>Базовый (4 занятия)</option><option>Оптимальный (8 занятий)</option>
+                                <option>Базовый (4 занятия)</option>
+                                <option>Оптимальный (8 занятий)</option>
                                 <option>Максимум (12 занятий)</option>
                             </select>
                         </div>
                         <div class="col-12">
                             <label class="form-label text-dark small fw-medium">Примерный уровень</label>
                             <select class="form-select form-select-lg" id="level">
-                                <option>Начинающий (с нуля)</option><option>Немного учил</option>
-                                <option>Средний (могу объясниться)</option><option>Продвинутый</option>
+                                <option>Начинающий (с нуля)</option>
+                                <option>Немного учил</option>
+                                <option>Средний (могу объясниться)</option>
+                                <option>Продвинутый</option>
                             </select>
                         </div>
                         <div class="col-12 mt-3">
@@ -337,7 +353,7 @@
                     </div>
                 </form>
                 <div id="formSuccess" class="alert alert-success mt-2 d-none text-center">
-                    <i class="bi bi-check-circle-fill me-2"></i>Спасибо! Мы свяжемся с вами в ближайшее время.
+                    <i class="bi bi-check-circle-fill me-2"></i>Спасибо! Ваша заявка принята.
                 </div>
             </div>
         </div>
@@ -390,6 +406,9 @@
     (function() { emailjs.init("aZHRiHj46zYYgMIVz"); })();
 </script>
 <script src="js/main.js"></script>
+
+<!-- Центральное всплывающее сообщение -->
+<div id="centerMessage" class="center-message" style="display: none;"></div>
 
 </body>
 </html>

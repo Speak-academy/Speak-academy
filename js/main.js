@@ -284,7 +284,7 @@ if (submitReviewBtn) {
         }
 
         if (!validateReviewText(textInput.value)) {
-            setInvalid(textInput, 'Отзыв должен быть от 30 до 150 символов');
+            setInvalid(textInput, 'Отзыв должен быть от 15 до 150 символов');
             isValid = false;
         } else setValid(textInput);
 
